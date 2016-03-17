@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+        <style>
+            .chart div {
+              font: 10px sans-serif;
+              background-color: steelblue;
+              text-align: right;
+              padding: 3px;
+              margin: 1px;
+              color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="chart"></div>
+
+        <script>
+            var json_data = {% raw data %}
+            var data  = []
+            for(var i in json_data) {
+                data.push(json_data[i]);
+            }
+
+            d3.select(".chart")
+              .selectAll("div")
+                .data(data)
+              .enter().append("div")
+                .style("width", function(d) { return d * 0.05 + "px"; })
+                .text(function(d) { return d; });
+        </script>
+    </body>
+ </html>
+
